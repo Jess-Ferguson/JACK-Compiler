@@ -144,15 +144,15 @@ static int _getNextToken(token * nextToken)
 		nextToken->type = integer;
 	} else if(c == '"') {
 		do {
-			tempString[pos++] = c;
 			c = fgetc(sourceFile);
+			tempString[pos++] = c;
 
 			if(c == '\n' || c == EOF) {
 				return LEX_ERROR;
 			}
 		} while(c != '"' && pos < MAX_LEXEME_SIZE - 2);
 
-		tempString[pos] = '"';
+		tempString[--pos] = '\0';
 		nextToken->type = string;
 	} else { /* If it's not a number or a string literal then the it must be either an identifier or a keyword */
 		do {

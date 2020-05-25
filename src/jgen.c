@@ -300,7 +300,7 @@ char * processTerm(term * curTerm)
 		} else if(curTerm->constantType == stringType) {
 			fprintf(curFile, "push constant %zu\ncall String.new 1\n", strlen(curTerm->constantTerm));
 
-			for(unsigned int i = 1; curTerm->constantTerm[i + 1]; i++)
+			for(unsigned int i = 0; curTerm->constantTerm[i]; i++)
 				fprintf(curFile, "push constant %d\ncall String.appendChar 2\n", curTerm->constantTerm[i]);
 
 			return "String";
